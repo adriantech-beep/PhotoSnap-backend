@@ -16,6 +16,9 @@ const allowedOrigins = [
     process.env.FRONTEND_URL,
     "http://localhost:5173",
     "http://localhost:5174",
+    "https://photo-snap-e2xx.vercel.app",
+    "https://photo-snap-e2xx-git-main-adriantech-beeps-projects.vercel.app",
+    "https://photo-snap-e2xx-668otdvdt-adriantech-beeps-projects.vercel.app",
 ];
 app.use((0, cors_1.default)({
     origin: (origin, callback) => {
