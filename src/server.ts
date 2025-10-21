@@ -3,6 +3,7 @@ import http from "http";
 import cors from "cors";
 import dotenv from "dotenv";
 import sessionRoutes from "./routes/sessionRoutes";
+import removeBackgroundRoutes from "./routes/removeBackgroundRoutes";
 import { initSocket } from "./socket/io";
 
 dotenv.config();
@@ -14,6 +15,7 @@ const allowedOrigins = [
   process.env.FRONTEND_URL,
   "http://localhost:5173",
   "http://localhost:5174",
+  "http://localhost:5176",
   "https://photo-snap-e2xx.vercel.app",
   "https://photo-snap-e2xx-git-main-adriantech-beeps-projects.vercel.app",
   "https://photo-snap-e2xx-668otdvdt-adriantech-beeps-projects.vercel.app",
@@ -34,6 +36,8 @@ app.use(
 app.use(express.json());
 
 app.use("/", sessionRoutes);
+
+app.use("/", removeBackgroundRoutes);
 
 initSocket(server);
 
