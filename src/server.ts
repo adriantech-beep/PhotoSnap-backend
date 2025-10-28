@@ -3,7 +3,6 @@ import http from "http";
 import cors from "cors";
 import dotenv from "dotenv";
 import sessionRoutes from "./routes/sessionRoutes";
-import removeBackgroundRoutes from "./routes/removeBackgroundRoutes";
 import { initSocket } from "./socket/io";
 
 dotenv.config();
@@ -36,8 +35,6 @@ app.use(
 app.use(express.json());
 
 app.use("/", sessionRoutes);
-
-app.use("/", removeBackgroundRoutes);
 
 initSocket(server);
 
