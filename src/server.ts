@@ -16,7 +16,7 @@ const allowedOrigins = [
   "http://localhost:5174",
   "http://localhost:5175",
   "http://localhost:5176",
-  "https://photobooth-kappa-coral.vercel.app/",
+  "https://photobooth-kappa-coral.vercel.app",
 ];
 
 app.use(
