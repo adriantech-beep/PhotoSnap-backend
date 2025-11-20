@@ -1,14 +1,12 @@
-import express from "express";
-import { createSession } from "../controllers/createSessionController";
-import { paySessionController } from "../controllers/paySessionController";
-import { payStatusController } from "../controllers/payStatusController";
-import { setControlModeController } from "../controllers/setControlModeController";
+import { Router } from "express";
+import { getSessionImages } from "../controllers/sessionImagesControllers";
+import { generateZip } from "../controllers/generateZipControllers";
+import { finalizeSession } from "../controllers/finalizeControllers";
 
-const router = express.Router();
+const router = Router();
 
-router.post("/create-session", createSession);
-router.post("/pay/:id", paySessionController);
-router.get("/session/:id", payStatusController);
-router.post("/set-control-mode", setControlModeController);
+router.get("/sessions/:sessionId/images", getSessionImages);
+router.get("/generate-zip/:sessionId", generateZip);
+router.post("/finalize-session", finalizeSession);
 
 export default router;

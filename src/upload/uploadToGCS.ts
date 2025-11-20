@@ -1,0 +1,40 @@
+// src/utils/gcs.ts
+import { Storage } from "@google-cloud/storage";
+import path from "path";
+
+const bucketName = process.env.GCS_BUCKET!;
+if (!bucketName) throw new Error("GCS_BUCKET env is required");
+
+const storage = new Storage();
+
+export const bucket = storage.bucket(bucketName);
+
+export async function uploadBufferToGCS(
+  buffer: Buffer,
+  destinationPath: string,
+  contentType = "application/octet-stream",
+  makePublic = false
+) {
+  const file = bucket.file(destinationPath);
+  await file.save(buffer, { contentType });
+  if (makePublic) await file.makePublic();
+  // Public URL pattern
+  return `https://storage.googleapis.com/${bucketName}/${destinationPath}`;
+}
+
+export async function uploadJSONToGCS(obj: any, destinationPath: string, makePublic = false) {
+  const buffer = Buffer.from(JSON.stringify(obj, null, 2));
+  return uploadBufferToGCS(buffer, destinationPath, "application/json", makePublic);
+}
+
+export async function readJSONFromGCS(destinationPath: string) {
+  const file = bucket.file(destinationPath);
+  const [exists] = await file.exists();
+  if (!exists) return null;
+  const [contents] = await file.download();
+  return JSON.parse(contents.toString("utf-8"));
+}
+
+export async function getPublicUrl(destinationPath: string) {
+  return `https://storage.googleapis.com/${bucketName}/${destinationPath}`;
+}
