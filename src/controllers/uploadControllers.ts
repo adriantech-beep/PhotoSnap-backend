@@ -1,4 +1,3 @@
-// // src/controllers/uploadController.ts
 import { Request, Response, NextFunction } from "express";
 import {
   uploadJSONToGCS,
@@ -31,7 +30,6 @@ export const uploadMultipleImages = async (
     const results = await Promise.all(uploadPromises);
     const urls = results.map((r: any) => r.secure_url);
 
-    // Read existing session JSON from GCS (if any)
     const sessionPath = `sessions/${folderName}.json`;
     const existing = (await readJSONFromGCS(sessionPath)) || {
       sessionId: folderName,
@@ -46,7 +44,6 @@ export const uploadMultipleImages = async (
       true
     );
 
-    // Optionally return the public GCS URL for the session JSON as well
     const sessionPublicUrl = getPublicUrl(sessionPath);
 
     return res.json({
