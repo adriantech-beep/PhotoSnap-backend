@@ -1,11 +1,12 @@
+import dotenv from "dotenv";
+dotenv.config();
+
 import express from "express";
 import http from "http";
 import cors from "cors";
-import dotenv from "dotenv";
+
 import uploadRoutes from "./routes/uploadRoutes";
 import sessionRoutes from "./routes/sessionRoutes";
-
-dotenv.config();
 
 const app = express();
 const server = http.createServer(app);
@@ -34,7 +35,7 @@ app.use(
     methods: ["GET", "POST"],
   })
 );
-app.use("/upload-images", uploadRoutes);
+app.use("/", uploadRoutes);
 app.use("/", sessionRoutes);
 
 app.use(express.json());

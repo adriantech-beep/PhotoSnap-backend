@@ -1,21 +1,3 @@
-// import fs from "fs";
-// import path from "path";
-// import { Request, Response } from "express";
-
-// export const getSessionImages = (req: Request, res: Response) => {
-//   const { sessionId } = req.params;
-
-//   const filePath = path.join(__dirname, "../sessions", `${sessionId}.json`);
-
-//   if (!fs.existsSync(filePath)) {
-//     return res.status(404).json({ error: "Session not found" });
-//   }
-
-//   const data = JSON.parse(fs.readFileSync(filePath, "utf8"));
-//   res.json({ urls: data.urls });
-// };
-
-// src/controllers/sessionController.ts
 import { Request, Response } from "express";
 import { readJSONFromGCS } from "../upload/uploadToGCS";
 
